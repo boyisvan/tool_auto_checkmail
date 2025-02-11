@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cấu hình Email Tool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .form-control {
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .alert {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .card-body ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .card-body ul li {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        @media (min-width: 768px) {
+            .config-left {
+                margin-right: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Email Tool</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Cấu hình</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/accounts">Tài khoản</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logs">Nhật ký</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/run_tool_page">Chạy tools</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-1">
+        <h3 class="text-center mb-3">Cấu hình Email Tool</h3>
+        <div class="row d-flex" style="display: flex;">
+            <!-- Phần trái: Form cấu hình -->
+            <div class="col-md-6 ">
+                <div class="card">
+                    <form method="post" action="/">
+                        <div class="mb-3">
+                            <label for="admin_email" class="form-label">Email Quản trị</label>
+                            <input type="email" class="form-control" id="admin_email" name="admin_email"  placeholder="vd: admin@gmail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telegram_bot_token" class="form-label">Token Bot Telegram</label>
+                            <input type="text" class="form-control" id="telegram_bot_token" name="telegram_bot_token" value="{{ config.telegram_bot_token if config else '' }}" placeholder="Bot Token" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telegram_admin_chat_id" class="form-label">Chat ID Quản trị</label>
+                            <input type="text" class="form-control" id="telegram_admin_chat_id" name="telegram_admin_chat_id"  placeholder="Telegram Chat ID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="check_from_emails" class="form-label">Email Cần Kiểm Tra <span style="font-size: 10px;">(Địa chỉ gửi thư đến)</span></label>
+                            <input type="text" class="form-control" id="check_from_emails" name="check_from_emails"  placeholder="vd: checkemail@gmail.com" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">Lưu Cấu Hình</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Phần phải: Cấu hình hiện tại -->
+            <div class="col-md-6">
+                {% if config %}
+                <div class="card">
+                    <div class="alert alert-success">
+                        <strong class="text-center w-100 d-block"> Cấu hình hiện tại</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Email Quản trị:</strong> {{ config.admin_email }}</li>
+                            <li><strong>Token Bot Telegram:</strong> {{ config.telegram_bot_token }}</li>
+                            <li><strong>Chat ID Quản trị:</strong> {{ config.telegram_admin_chat_id }}</li>
+                            <li><strong>Email Cần Kiểm Tra:</strong> {{ config.check_from_emails }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Thêm một liên kết dẫn đến BotFather -->
+                <div class="text-center mt-2">
+                    <a href="https://t.me/BotFather?start=newbot" class="btn btn-outline-info" target="_blank">
+                        Tạo Token Bot Telegram
+                    </a>
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <strong><i class="bi bi-info-circle"></i> Chưa có cấu hình hiện tại</strong>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,13 @@
+{
+  "admin_email": "ducvan05102002@gmail.com",
+  "telegram_bot_token": "7760536676:AAE8HtLbXQSX-BUaT3Jvprtx9QKtkj5lSzs",
+  "telegram_admin_chat_id": "5405720288",
+  "check_from_emails": "khan051002@gmail.com",
+  "accounts": [
+    {
+      "email": "ducvan05102002@gmail.com",
+      "password": "qusoruyluwruzplm",
+      "telegram_chat_id": "5405720288"
+    }
+  ]
+}
